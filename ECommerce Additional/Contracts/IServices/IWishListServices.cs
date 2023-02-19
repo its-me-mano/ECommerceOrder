@@ -40,7 +40,7 @@ namespace ECommerce_Additional.Contracts.IServices
         /// <param name="name"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        IEnumerable<WishList> GetWishListByName(string name,Guid userId);
+        IEnumerable<WishList> GetWishListByName(string name,ClaimsPrincipal user);
         /// <summary>
         /// Delete the particular wishlist based on the wishlistId
         /// </summary>

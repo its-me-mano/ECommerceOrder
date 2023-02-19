@@ -87,7 +87,11 @@ namespace ECommerce_Additional
                     });
                 });
             }
-            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ECommerceCart");
+            });
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

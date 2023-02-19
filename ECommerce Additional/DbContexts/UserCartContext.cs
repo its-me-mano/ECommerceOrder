@@ -25,7 +25,7 @@ namespace ECommerce_Additional.DbContexts
             {
                 Id = new Guid("917c0fc2-7994-4fa4-a96b-d9a12a3fc907"),
                 UserId = new Guid("f46f9dba-8a1c-4dd9-a8ea-c572a83be0be"),
-                ProductId = new Guid("2b6aa7d6-1974-430f-a760-3ced549d0471"),
+                ProductId = new Guid("e0df594f-1a9b-4fa8-9ac0-6b24db187318"),
                 Quantity = 1,
                 Price = 5000,
                 PaymentMethod = "UPI",

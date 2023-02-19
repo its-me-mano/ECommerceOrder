@@ -49,7 +49,7 @@ namespace ECommerce_Additional.Services
         /// <param name="User"></param>
         /// <returns></returns>
         public string GetLoggedId(ClaimsPrincipal User) {
-            string LoggedUserId = String.Empty;
+                string LoggedUserId = String.Empty;
             if (!String.IsNullOrEmpty(ClaimTypes.NameIdentifier))
                 LoggedUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return LoggedUserId;
@@ -89,6 +89,8 @@ namespace ECommerce_Additional.Services
         public void AddToCart(Guid wishlistId) {
             WishList wishlist = _repositories.GetWishList(wishlistId);
             Order order = _mapper.Map<Order>(wishlist);
+            order.IsOrder = true;
+            order.Quantity = 1;
             _repositories.AddOrder(order);
             _repositories.Save();
         }
@@ -97,9 +99,10 @@ namespace ECommerce_Additional.Services
         /// Get the wislist based on userId and name
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="userId"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
-        public IEnumerable<WishList> GetWishListByName(string name, Guid userId) {
+        public IEnumerable<WishList> GetWishListByName(string name, ClaimsPrincipal user) {
+            Guid userId = new Guid(GetLoggedId(user));
             return _repositories.GetWishListByName(name, userId);
         }
 
@@ -131,6 +134,7 @@ namespace ECommerce_Additional.Services
         /// <param name="lists"></param>
         /// <returns></returns>
         public IEnumerable<ProductDto> GetProductsByWishList(IEnumerable<WishList> lists,string token) {
+    
             var queryString = string.Join("&",lists.Select(g => $"{g.ProductId}"));
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);

@@ -1,17 +1,19 @@
 ﻿using AutoMapper;
+using ECommerce_Additional.Entities.Dtos;
 using ECommerce_Additional.Entities.Models;
-using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ECommerce_Additional.Profiles
 {
-    public class AutoMapper : Profile
+    public class Automapper : Profile
     {
-        public AutoMapper()
+        public Automapper()
         {
             CreateMap<WishList, Order>().ReverseMap();
+            CreateMap<Order, Order>();
+            CreateMap<OrderDto, Order>().ReverseMap();
+            CreateMap<List<OrderDto>, List<Order>>().ReverseMap();
 
         }
     }
